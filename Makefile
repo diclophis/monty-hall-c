@@ -1,22 +1,22 @@
 # OSX Makefile
 
 CXXFLAGS=\
--m64 \
--Wall \
--g \
--pg \
--I/usr/include \
+-Wall
+
+#-O3
+#-funroll-all-loops \
+#-fprofile-use
 
 CFLAGS=$(CXXFLAGS)
-LDFLAGS=-m64 -arch x86_64
+LDFLAGS=
+#-m64
 
-objects   = $(patsubst %,build/%, $(patsubst %.c,%.o, $(wildcard *.c)))
+objects = $(patsubst %,build/%, $(patsubst %.c,%.o, $(wildcard *.c)))
 
 build/play: build/monty-hall
-	build/monty-hall
 
 build/monty-hall: build $(objects)
-	$(CC) $(LDFLAGS) -o build/monty-hall $(objects)
+	$(CC) $(LDFLAGS) -o build/monty-hall.js $(objects)
 
 build/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
